@@ -11,20 +11,21 @@
   "main": "dist/annotator-module.js",
   "private": true,
   "devDependencies": {
+    "node-gyp": "^7.0.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^8.0.0",
-    "browserify-css": "^0.14.0",
+    "browserify-css": "^0.15.0",
     "browserify-shim": "^3.8.13",
-    "grunt": "^1.0.3",
+    "grunt": "^1.2.1",
     "grunt-browser-sync": "^2.2.0",
     "grunt-browserify": "^5.3.0",
-    "grunt-contrib-compress": "^1.4.1",
+    "grunt-contrib-compress": "^1.6.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-extract-sourcemap": "^0.1.19",
-    "uglifyify": "^5.0.0"
+    "uglifyify": "^5.0.2"
   },
   "dependencies": {
     "clip-path-polygon": "^0.1.13",
