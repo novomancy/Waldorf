@@ -1,23 +1,28 @@
 {
   "name": "Waldorf",
   "author": "Jonathan Cole <joncole04412@gmail.com>",
-  "description": "Description",
-  "version": "0.0.2",
+  "contributors": [
+    "John Bell <john.p.bell@dartmouth.edu>",
+    "Craig Dietrich <craigdietrich@gmail.com>",
+    "Sivakumar P. Kandasamy <sivajankan@gmail.com>"
+  ],
+  "description": "Video annotator",
+  "version": "0.0.3",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/seieibob/Waldorf"
+    "url": "https://github.com/novomancy/Waldorf"
   },
   "main": "dist/annotator-module.js",
   "private": true,
   "devDependencies": {
-    "node-gyp": "^7.0.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-es2015": "^6.24.1",
-    "babelify": "^8.0.0",
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "babelify": "^10.0.0",
     "browserify-css": "^0.15.0",
-    "browserify-shim": "^3.8.13",
+    "browserify-shim": "^3.8.14",
+    "clip-path-polygon": "^0.1.14",
     "grunt": "^1.2.1",
     "grunt-browser-sync": "^2.2.0",
     "grunt-browserify": "^5.3.0",
@@ -25,17 +30,17 @@
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-extract-sourcemap": "^0.1.19",
-    "uglifyify": "^5.0.2"
-  },
-  "dependencies": {
-    "clip-path-polygon": "^0.1.13",
+    "jquery": "^3.5.1",
     "jquery-ui": "^1.12.1",
     "qtip2": "^3.0.3",
-    "sass": "^1.15.1",
-    "screenfull": "^3.0.2",
-    "select2": "^4.0.6-rc.1",
+    "sass": "^1.26.10",
+    "screenfull": "^5.0.2",
+    "select2": "^4.0.13",
+    "serialize-javascript": "^4.0.0",
     "sha1": "^1.1.1",
-    "webpack": "^4.26.1"
+    "terser-webpack-plugin": "^3.0.7",
+    "uglifyify": "^5.0.2",
+    "webpack": "^4.43.0"
   },
   "scripts": {
     "test": "grunt test"
@@ -49,7 +54,7 @@
         "babelify",
         {
           "presets": [
-            "es2015"
+            "@babel/env"
           ]
         }
       ],
