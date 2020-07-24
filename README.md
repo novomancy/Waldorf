@@ -41,7 +41,7 @@ The .annotate() call can be passed an object with configuration options. Valid o
 
 ```
 Server/storage options:
-serverURL: serverAddress        //The URL of a Statler server API to store annotations
+serverURL: serverAddress        //The URL of a Statler server API or Scalar book to store annotations
 apiKey: apiKey                  //If you are managing access to Statler with an API key, 
                                 //provide it here
 localURL: localAnnotations      //If provided, loads annotations from a local json file
@@ -52,6 +52,7 @@ kioskMode: false                //kioskMode removes the annotation editing inter
 tagsURL: tagsAddress            //If you have an external tagging vocabulary, provide the 
                                 //URL to it here
 displayIndex: true              //Whether or not to display an index of annotations
+annotationServer: "scalar"      //use either "scalar" or "statler". Default is "scalar"
 
 User options:
                                 //NOTE: Setting these options will disable Stater user login!

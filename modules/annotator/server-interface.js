@@ -92,7 +92,23 @@ class ServerInterface {
         });
     }
 
-    FetchAnnotations(searchKey, searchParam) {
+    FetchAnnotationsScalar(searchKey, searchParam) {
+        var ajax_url = this.baseURL + 'rdf/file/' + searchParam.replace(this.baseURL,'') + '?format=oac&prov=1&rec=2';
+        return $.ajax({
+            url: ajax_url,
+            type: "GET",
+            jsonp: "callback",
+            datatype: "jsonp",
+            async: true
+        }).done(function (data) {
+            console.log('Fetched ' + data.length + ' annotations for ' + searchKey + ': "' + searchParam + '".');
+        }).fail(function (response) {
+            console.error('Error fetching annotations for ' + searchKey + ': "' + searchParam + '"\n' + response.responseJSON.detail + '.');
+            _this2.annotator.messageOverlay.ShowError('Could not retrieve annotations!<br>(' + response.responseJSON.detail + ')');
+        });  
+    }
+
+    FetchAnnotationsStatler(searchKey, searchParam) {
         return $.ajax({
             url: this.baseURL + "/api/getAnnotationsByLocation",
             type: "GET",
@@ -105,6 +121,14 @@ class ServerInterface {
             console.error(`Error fetching annotations for ${searchKey}: "${searchParam}"\n${response.responseJSON.detail}.`);
             this.annotator.messageOverlay.ShowError(`Could not retrieve annotations!<br>(${response.responseJSON.detail})`);
         });
+    }
+
+    FetchAnnotations(searchKey, searchParam) {
+        if (this.annotator.annotationServer == "statler") {
+            return this.FetchAnnotationsStatler(searchKey, searchParam);
+        } else {
+            return this.FetchAnnotationsScalar(searchKey, searchParam);
+        }
     }
 
     PostAnnotation(callback){
