@@ -152,6 +152,7 @@ class VideoPlayerBar {
     UpdateVideoTime(){
         // Calculate the new time
         let time = this.player.videoElement.duration * this.$seekBar.slider("value");
+        this.player.endTime = false;
         this.player.videoElement.currentTime = time;
     }
 

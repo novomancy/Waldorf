@@ -34,6 +34,7 @@ class AnnotatorVideoPlayer {
         /// Seconds before the UI fades due to mouse inactivity.
         this.idleSecondsBeforeFade = 3;
         this.fadeDuration = 300;
+        this.endTime = false;
 
         this.$container.mousemove(() => this.OnMouseMove());
         this.SetAutoFade(true);
@@ -116,11 +117,13 @@ class AnnotatorVideoPlayer {
 
     Play(){
         this.videoElement.play();
+        if(this.endTime) this.endTime = false;
         this.SetAutoFade(true);
         this.$container.trigger("OnPlayStateChange", !this.videoElement.paused);
     }
 
     Pause(){
+        if(this.endTime) this.endTime = false;
         this.videoElement.pause();
         this.SetAutoFade(false);
         this.$container.trigger("OnPlayStateChange", !this.videoElement.paused);
@@ -180,6 +183,10 @@ class AnnotatorVideoPlayer {
     }
 
     OnTimeUpdate(time){
+        if(this.endTime && this.endTime <= this.videoElement.currentTime){
+            this.Pause();   
+            this.endTime = false;
+        }
         this.$container.trigger("OnTimeUpdate", time);
     }
 
