@@ -38,6 +38,8 @@ class VideoAnnotator {
         //Optional params
         //Removes the editing interface
         this.kioskMode = typeof args.kioskMode === 'undefined' ? '' : args.kioskMode;
+        //Shows the 'open manifest' button if kioskMode is off
+        this.showManifest = typeof args.showManifest === 'undefined' ? false : args.showManifest;  
         //Allows passing in a function that overrides the default annotation renderer
         this.renderer = typeof args.renderer === 'undefined' ? false : args.renderer;
         //Allows passing in a function that overrides the default annotation renderer
@@ -161,7 +163,7 @@ class VideoAnnotator {
         // Create the polygon overlay
         this.polyOverlay = new PolygonOverlay(this);
 
-        if(!this.kioskMode){
+        if(!this.kioskMode && this.showManifest){
             this.$debugControls = $("<div class='waldorf-debug-controls'></div>").appendTo(this.$container);
             var $showAllAnnotationsButton = this.$debugControls.append('<button>Open Annotation Manifest in New Window</button>');
             $showAllAnnotationsButton.click(() => {

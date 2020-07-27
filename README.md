@@ -49,6 +49,8 @@ localURL: localAnnotations      //If provided, loads annotations from a local js
 
 Editing options:
 kioskMode: false                //kioskMode removes the annotation editing interface
+showManifest: false             //showManifest adds a button to pop a new window with annotation
+                                //json. kioskMode: true implies showManifest: true
 tagsURL: tagsAddress            //If you have an external tagging vocabulary, provide the 
                                 //URL to it here
 displayIndex: true              //Whether or not to display an index of annotations
