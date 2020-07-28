@@ -40,7 +40,7 @@ class ServerInterface {
     LogIn(username, password){
         // If API key is used, just store the email address
         if(this.annotator.apiKey){
-            console.log("Successfully logged in.");
+            console.log("[" + this.constructor.name + "] " + "Successfully logged in.");
             localStorage.setItem('waldorf_user_email', password);
             localStorage.setItem('waldorf_user_name', username);
             this.annotator.messageOverlay.ShowMessage("Logged in as "+username);
@@ -56,10 +56,10 @@ class ServerInterface {
                 xhr.setRequestHeader('Authorization', this.make_base_auth(username, password));
             }
         }).done((data) => {
-            console.log("Successfully logged in.");
+            console.log("[" + this.constructor.name + "] " + "Successfully logged in.");
             localStorage.setItem('waldorf_auth_token', data.auth_token);
         }).fail((response) => {
-            console.error("Could not log in.");
+            console.error("[" + this.constructor.name + "] " + "Could not log in.");
             this.annotator.messageOverlay.ShowError("Could not log in!");
         });
     }
@@ -67,7 +67,7 @@ class ServerInterface {
     LogOut(){
         // If API key is used, just remove the email from local storage.
         if(this.annotator.apiKey){
-            console.log("Successfully logged out.");
+            console.log("[" + this.constructor.name + "] " + "Successfully logged out.");
             localStorage.removeItem('waldorf_user_email');
             localStorage.removeItem('waldorf_user_name');
             return $.Deferred().resolve();
@@ -80,14 +80,14 @@ class ServerInterface {
             context: this,
             beforeSend: function (xhr) {
                 let auth_token = localStorage.getItem('waldorf_auth_token') || "";
-                console.log(`token: ${auth_token}`);
+                console.log(`[${this.constructor.name}] token: ${auth_token}`);
                 xhr.setRequestHeader('Authorization', this.make_write_auth(auth_token));
             }
         }).done((data) => {
-            console.log("Successfully logged out.");
+            console.log("[" + this.constructor.name + "] " + "Successfully logged out.");
             localStorage.removeItem('waldorf_auth_token');
         }).fail((response) => {
-            console.error("Could not log out.");
+            console.error("[" + this.constructor.name + "] " + "Could not log out.");
             localStorage.removeItem('waldorf_auth_token');
         });
     }
@@ -101,9 +101,9 @@ class ServerInterface {
             datatype: "jsonp",
             async: true
         }).done(function (data) {
-            console.log('Fetched ' + data.length + ' annotations for ' + searchKey + ': "' + searchParam + '".');
+            console.log('[' + this.constructor.name + '] ' + 'Fetched ' + data.length + ' annotations for ' + searchKey + ': "' + searchParam + '".');
         }).fail(function (response) {
-            console.error('Error fetching annotations for ' + searchKey + ': "' + searchParam + '"\n' + response.responseJSON.detail + '.');
+            console.error('[' + this.constructor.name + '] ' + 'Error fetching annotations for ' + searchKey + ': "' + searchParam + '"\n' + response.responseJSON.detail + '.');
             _this2.annotator.messageOverlay.ShowError('Could not retrieve annotations!<br>(' + response.responseJSON.detail + ')');
         });  
     }
@@ -116,9 +116,9 @@ class ServerInterface {
             dataType: "json",
             async: true
         }).done((data) => {
-            console.log(`Fetched ${data.length} annotations for ${searchKey}: "${searchParam}".`);
+            console.log(`[${this.constructor.name}] Fetched ${data.length} annotations for ${searchKey}: "${searchParam}".`);
         }).fail((response) => {
-            console.error(`Error fetching annotations for ${searchKey}: "${searchParam}"\n${response.responseJSON.detail}.`);
+            console.error(`[${this.constructor.name}] Error fetching annotations for ${searchKey}: "${searchParam}"\n${response.responseJSON.detail}.`);
             this.annotator.messageOverlay.ShowError(`Could not retrieve annotations!<br>(${response.responseJSON.detail})`);
         });
     }
@@ -132,7 +132,7 @@ class ServerInterface {
     }
 
     PostAnnotation(callback){
-        console.log("Posting annotation...");
+        console.log("[" + this.constructor.name + "] " + "Posting annotation...");
         let annotation = this.annotator.gui.GetAnnotationObject();
         console.log(annotation);
 
@@ -142,7 +142,7 @@ class ServerInterface {
             let email_storage = localStorage.getItem('waldorf_user_email');
             let name_storage = localStorage.getItem('waldorf_user_name');
             if (email_storage === null) {
-                console.error("You are not logged in!");
+                console.error("[" + this.constructor.name + "] " + "You are not logged in!");
                 this.annotator.messageOverlay.ShowError("You are not logged in!");
                 return false;
             }
@@ -150,7 +150,7 @@ class ServerInterface {
         } else {
             key = localStorage.getItem('waldorf_auth_token');
             if (key === null) {
-                console.error("You are not logged in!");
+                console.error("[" + this.constructor.name + "] " + "You are not logged in!");
                 this.annotator.messageOverlay.ShowError("You are not logged in!");
                 return false;
             }
@@ -179,13 +179,13 @@ class ServerInterface {
                 xhr.setRequestHeader('Authorization', this.make_write_auth(key));
             },
             success: (data) => {
-                console.log("Successfully posted new annotation.");
+                console.log("[" + this.constructor.name + "] " + "Successfully posted new annotation.");
                 this.annotator.messageOverlay.ShowMessage("Successfully created new annotation.");
                 annotation.id = data.id; // Append the ID given by the response
                 if(callback) callback(annotation);
             },
             error: (response) => {
-                console.error(`Could not post new annotation! Message:\n ${response.responseJSON.detail}`);
+                console.error(`[${this.constructor.name}] Could not post new annotation! Message:\n ${response.responseJSON.detail}`);
                 this.annotator.messageOverlay.ShowError(`Could not post new annotation!<br>(${response.responseJSON.detail})`);
             }
 
@@ -201,7 +201,7 @@ class ServerInterface {
             let email_storage = localStorage.getItem('waldorf_user_email');
             let name_storage = localStorage.getItem('waldorf_user_name');
             if (email_storage === null) {
-                console.error("You are not logged in!");
+                console.error("[" + this.constructor.name + "] " + "You are not logged in!");
                 this.annotator.messageOverlay.ShowError("You are not logged in!");
                 return false;
             }
@@ -209,7 +209,7 @@ class ServerInterface {
         } else {
             key = localStorage.getItem('waldorf_auth_token');
             if (key === null) {
-                console.error("You are not logged in!");
+                console.error("[" + this.constructor.name + "] " + "You are not logged in!");
                 this.annotator.messageOverlay.ShowError("You are not logged in!");
                 return false;
             }
@@ -223,7 +223,7 @@ class ServerInterface {
 
         let oldID = annotation.id;
 
-        console.log("Modifying annotation " + oldID);
+        console.log("[" + this.constructor.name + "] " + "Modifying annotation " + oldID);
         
         $.ajax({
             url: this.baseURL + "/api/editAnnotation",
@@ -245,7 +245,7 @@ class ServerInterface {
                 if(callback) callback(annotation, oldID);
             },
             error: (response) => {
-                console.error(`Could not edit the annotation! Message:\n ${response.responseJSON.detail}`);
+                console.error(`[${this.constructor.name}] Could not edit the annotation! Message:\n ${response.responseJSON.detail}`);
                 this.annotator.messageOverlay.ShowError(`Could not edit the annotation!<br>(${response.responseJSON.detail})`);
             }
 
@@ -258,7 +258,7 @@ class ServerInterface {
             key = this.annotator.apiKey;
             let email_storage = localStorage.getItem('waldorf_user_email');
             if (email_storage === null) {
-                console.error("You are not logged in!");
+                console.error("[" + this.constructor.name + "] " + "You are not logged in!");
                 this.annotator.messageOverlay.ShowError("You are not logged in!");
                 let deferred = $.Deferred();
                 deferred.reject({
@@ -270,7 +270,7 @@ class ServerInterface {
         } else {
             key = localStorage.getItem('waldorf_auth_token');
             if (key === null) {
-                console.error("You are not logged in!");
+                console.error("[" + this.constructor.name + "] " + "You are not logged in!");
                 this.annotator.messageOverlay.ShowError("You are not logged in!");
                 let deferred = $.Deferred();
                 deferred.reject({
@@ -295,10 +295,10 @@ class ServerInterface {
             }
 
         }).done((response) => {
-            console.log("Successfully deleted the annotation.");
+            console.log("[" + this.constructor.name + "] " + "Successfully deleted the annotation.");
             this.annotator.messageOverlay.ShowMessage("Successfully deleted the annotation.");
         }).fail((response) => {
-            console.error(`Could not delete the annotation. Message:\n ${response.responseJSON.detail}`);
+            console.error(`[${this.constructor.name}] Could not delete the annotation. Message:\n ${response.responseJSON.detail}`);
             this.annotator.messageOverlay.ShowError(`Could not delete the annotation!<br>(${response.responseJSON.detail})`);
         });
     }

@@ -6,7 +6,7 @@ let sha1 = require('sha1');
 class SessionManager {
 
     constructor(annotator){
-        console.log("Creating SessionManager...");
+        console.log("[" + this.constructor.name + "] " + "Creating SessionManager...");
         this.annotator = annotator;
         this.modalOpen = false;
 
@@ -22,7 +22,7 @@ class SessionManager {
         }
         //this.$dialog.dialog("open");
 
-        console.log("SessionManager created.");
+        console.log("[" + this.constructor.name + "] " + "SessionManager created.");
 
     }
 
@@ -57,7 +57,7 @@ class SessionManager {
                 let nickName = $nicknameField.val();
                 let userName = sha1($usernameField.val());
                 this.annotator.server.LogIn(nickName, userName).done(() => {
-                    console.log("API key login success");
+                    console.log("[" + this.constructor.name + "] " + "API key login success");
                     $dialog.dialog("close");
                 }).fail(() => {
                     $headText.html("<p>Invalid email address.</p>");

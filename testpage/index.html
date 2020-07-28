@@ -85,7 +85,7 @@
 
         //This is an advanced option to create a function that runs when annotations are removed
         var customUnrenderer = function(annotator){
-            console.log('Unrendering');
+            console.log("[" + this.constructor.name + "] " + '[Sample Page] Unrendering');
             annotator.infoContainer.$container.empty();
         }
 
@@ -95,9 +95,9 @@
             waldorf = _waldorf;
             //This won't work immediately because the annotations aren't loaded, but
             //you can do the same thing later by watching for the OnAnnotationsLoaded event
-            console.log("nothing to see here" + waldorf.GetAnnotations());
+            console.log("[" + this.constructor.name + "] " + "[Sample Page] nothing to see here" + waldorf.GetAnnotations());
             waldorf.$container.on("OnAnnotationsLoaded", function(){
-                console.log("Now it works");
+                console.log("[" + this.constructor.name + "] " + "[Sample Page] Now it works");
                 console.log(waldorf.GetAnnotations());
             });
 

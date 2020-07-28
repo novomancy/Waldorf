@@ -3,7 +3,7 @@ let sha1 = require('sha1');
 
 class IndexContainer {
     constructor(annotator){
-        console.log("creating annotation index");
+        console.log("[" + this.constructor.name + "] " + "Creating annotation index");
         this.annotator = annotator;
         let container = $(".waldorf-index");
         if(container.length > 0){
@@ -69,7 +69,7 @@ class IndexContainer {
 
         $panel.append($content);
         $panel.appendTo(annotator.$annotationList);
-        console.log($panel);
+        // console.log($panel);
         return $panel;
     }
 

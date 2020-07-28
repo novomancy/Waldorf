@@ -6,6 +6,7 @@ let screenfull = require('screenfull');
 
 class AnnotatorVideoPlayer {
     constructor($video){
+        console.log("[AnnotatorVideoPlayer] Checking this.constructor.name -> " + this.constructor.name);
         console.log("[AnnotatorVideoPlayer] Creating AnnotatorVideoPlayer for video...");
         this.$video = $video;
         this.videoElement = this.$video.get(0);
