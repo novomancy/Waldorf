@@ -103,17 +103,22 @@
 
         }
     
-        //This configuration connects to a live Statler server to edit and share annotations
-        var statlerServer = "http://ec2-18-221-127-156.us-east-2.compute.amazonaws.com:3000";
-        var scalarServer = "http://scalar.usc.edu/dev/semantic-annotation-tool/";
-        var statlerServerVideoLink = "http://sachinchoolur.github.io/lightGallery/static/videos/video2.mp4";
-        var scalarServerVideoLink = "http://scalar.usc.edu/dev/semantic-annotation-tool/media/Inception%20Corgi%20Flop.mp4";
+        function launchWaldorf(){
+            //Note that it's not necessary to delay this or put it in a function call,
+            //it's only done here for demonstration purposes so you can see the original
+            //video and then the wrapped version after.
+            
+            //This configuration connects to a live Statler server to edit and share annotations
+            var statlerServer = "http://ec2-18-221-127-156.us-east-2.compute.amazonaws.com:3000";
+            var scalarServer = "http://scalar.usc.edu/dev/semantic-annotation-tool/";
+            var statlerServerVideoLink = "http://sachinchoolur.github.io/lightGallery/static/videos/video2.mp4";
+            var scalarServerVideoLink = "http://scalar.usc.edu/dev/semantic-annotation-tool/media/Inception%20Corgi%20Flop.mp4";
 
-        var tagsAddress = "https://onomy.org/published/83/json";
-        var apiKey = "bba00b0a-66f3-44a3-9f3c-9b2fa97d3f0a";
+            var tagsAddress = "https://onomy.org/published/83/json";
+            var apiKey = "bba00b0a-66f3-44a3-9f3c-9b2fa97d3f0a";
 
-        $("video").first().attr("src", statlerServerVideoLink);
-        $("video").first().annotate({serverURL: statlerServer, 
+            $("video").first().attr("src", statlerServerVideoLink);
+            $("video").first().annotate({serverURL: statlerServer, 
                                      tagsURL: tagsAddress, 
                                      apiKey: apiKey, 
                                      kioskMode: false,
@@ -126,6 +131,8 @@
                                      cmsUsername: "John Bell",
                                      cmsEmail: "user@example.com",
                                      annotationServer: "statler"});
+        }
+        setTimeout(launchWaldorf, 2000);
 
         //This configuration loads annotations from a static W3C OA-formatted file
         // var localAnnotations = "/testpage/annotation_cache.json";
