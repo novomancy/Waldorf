@@ -98,7 +98,7 @@ class ServerInterface {
             url: ajax_url,
             type: "GET",
             jsonp: "callback",
-            datatype: "jsonp",
+            dataType: "jsonp",
             async: true
         }).done(function (data) {
             console.log('[' + this.constructor.name + '] ' + 'Fetched ' + data.length + ' annotations for ' + searchKey + ': "' + searchParam + '".');
